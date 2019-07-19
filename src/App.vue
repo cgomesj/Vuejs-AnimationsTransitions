@@ -15,9 +15,16 @@
           <div v-if="show" class="alert alert-info my-2">This is a faded alert</div>
         </transition>
 
-        <transition :name="selectedTransition">
-          <div v-if="show" class="alert alert-info my-2">This is a slided and faded alert</div>
+        <transition :name="selectedTransition" mode="out-in">
+          <div
+            v-if="show"
+            class="alert alert-warning my-2"
+            key="warning"
+          >This is a slided and faded alert</div>
+          <div v-else class="alert alert-danger my-2" key="danger">This is a slided and faded alert</div>
         </transition>
+
+        <hr />
 
         <transition enter-active-class="animated bounce" leave-active-class="animated swing">
           <div v-if="show" class="alert alert-info my-2">This is an animated bounce swing div</div>
@@ -30,6 +37,25 @@
           :class="animationHeadShake"
           class="alert alert-info my-2"
         >This is animated alert</div>
+
+        <hr />
+
+        <button class="btn btn-success form-control" @click="load = !load">Load Remove Element</button>
+        <br />
+        <br />
+        <transition
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @after-enter="afterEnter"
+          @enter-cancelled="enterCancelled"
+          @before-leave="beforeLeave"
+          @leave="leave"
+          @after-leave="afterLeave"
+          @leave-cancelled="leaveCancelled"
+          :css="false"
+        >
+          <div style="width: 100px; height: 100px; background-color: lightblue" v-if="load"></div>
+        </transition>
       </div>
     </div>
   </div>
@@ -39,7 +65,8 @@
 export default {
   data() {
     return {
-      show: true,
+      show: false,
+      load: true,
       selectedTransition: "fade"
     };
   },
@@ -53,6 +80,40 @@ export default {
   methods: {
     toggleAlert() {
       this.show = !this.show;
+    },
+
+    beforeEnter(el) {
+      console.log("beforeEnter()");
+    },
+
+    enter(el, done) {
+      console.log("enter()");
+      done(console.log("enter.done()"));
+    },
+
+    afterEnter(el) {
+      console.log("afterEnter()");
+    },
+
+    enterCancelled(el) {
+      console.log("enterCancelled()");
+    },
+
+    beforeLeave(el) {
+      console.log("beforeLeave()");
+    },
+
+    leave(el, done) {
+      console.log("leave()");
+      done(console.log("leave.done()"));
+    },
+
+    afterLeave(el) {
+      console.log("afterLeave()");
+    },
+
+    leaveCancelled(el) {
+      console.log("leaveCancelled()");
     }
   }
 };
@@ -91,7 +152,7 @@ export default {
 
 .slide-leave-active {
   animation: slide-out 1s ease-out forwards;
-  transition: opacity 3s;
+  transition: opacity 1s;
   opacity: 0;
 }
 
