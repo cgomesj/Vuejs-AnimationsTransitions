@@ -6,7 +6,7 @@
           <h1>Animations</h1>
         </div>
         <div class="row">
-          <div class="col-sm-6 col-sm-offset-2">
+          <div class="col-sm-12 col-md-6">
             <select class="form-control form-control-sm" v-model="selectedTransition">
               <option value="fade">Fade</option>
               <option value="slide">Slide</option>
@@ -92,9 +92,9 @@
             <hr />
           </div>
 
-          <div class="col-sm-6 col-sm-offset-2">
-            <button class="btn btn-secondary form-control" @click="addItem">Add Item</button>
-            <ul class="list-group my-3">
+          <div class="col-sm-12 col-md-6">
+            <button class="btn btn-light shadow border form-control" @click="addItem">Add Item</button>
+            <ul class="list-group my-3 shadow">
               <li
                 class="list-group-item"
                 v-for="(number, index) in numbers"
