@@ -11,15 +11,14 @@
         <br />
         <button @click="toggleAlert" class="btn btn-primary form-control">Show alerts</button>
 
-        <transition :name="selectedTransition">
-          <div v-if="show" class="alert alert-info my-2">This is the first alert</div>
-        </transition>
-
         <transition :name="selectedTransition" mode="out-in">
           <div v-if="show" class="alert alert-warning my-2" key="warning">Warning div</div>
           <div v-else class="alert alert-danger my-2" key="danger">Danger div</div>
         </transition>
 
+        <transition :name="selectedTransition">
+          <div v-if="show" class="alert alert-info my-2">This is the first alert</div>
+        </transition>
         <hr />
 
         <transition enter-active-class="animated bounce" leave-active-class="animated swing">
@@ -85,6 +84,7 @@
           />
           <label class="form-check-label" for="radioSuccessComponent">Success</label>
         </div>
+
         <transition :name="selectedTransition" mode="out-in">
           <component :is="selectedComponent" class="my-3"></component>
         </transition>
