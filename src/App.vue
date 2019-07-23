@@ -135,7 +135,9 @@
               </div>
             </div>
             <div v-if="part == 2" class="row">
-              <h2>Part II</h2>
+              <div class="col">
+                <component :is="'app-part-ii'"></component>
+              </div>
             </div>
           </div>
         </div>
@@ -147,11 +149,13 @@
 <script>
 import DangerAlert from "./components/DangerAlert.vue";
 import SuccessAlert from "./components/SuccessAlert.vue";
+import PartII from "./components/PartII.vue";
 
 export default {
   components: {
     "app-danger-alert": DangerAlert,
-    "app-success-alert": SuccessAlert
+    "app-success-alert": SuccessAlert,
+    "app-part-ii": PartII
   },
 
   data() {
@@ -162,7 +166,7 @@ export default {
       elementWidth: 100,
       selectedComponent: "app-success-alert",
       numbers: [1, 2, 3, 4, 5],
-      part: 1
+      part: 2
     };
   },
 
