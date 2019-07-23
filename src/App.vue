@@ -4,25 +4,10 @@
       <div class="col">
         <div class="row my-3">
           <div class="col">
-            <h1>Animations & Transitions</h1>
-          </div>
-        </div>
-        <div class="row my-4">
-          <div class="col">
-            <div class="btn-group" role="group" aria-label="Choose Part">
-              <button
-                @click="part = 1"
-                type="button"
-                :class="{ active: (part == 1) }"
-                class="btn btn-light"
-              >Part I</button>
-              <button
-                @click="part = 2"
-                type="button"
-                :class="{ active: (part == 2) }"
-                class="btn btn-light"
-              >Part II</button>
-            </div>
+            <h1>
+              Animations & Transitions
+              <component :is="'app-toggle-part'" :part="part" @toggle-part="togglePart"></component>
+            </h1>
           </div>
         </div>
         <div class="row">
@@ -136,7 +121,7 @@
             </div>
             <div v-if="part == 2" class="row">
               <div class="col">
-                <component :is="'app-part-ii'"></component>
+                <component :is="'app-quiz'"></component>
               </div>
             </div>
           </div>
@@ -149,13 +134,15 @@
 <script>
 import DangerAlert from "./components/DangerAlert.vue";
 import SuccessAlert from "./components/SuccessAlert.vue";
-import PartII from "./components/PartII.vue";
+import Quiz from "./components/Quiz.vue";
+import TogglePart from "./components/TogglePart.vue";
 
 export default {
   components: {
     "app-danger-alert": DangerAlert,
     "app-success-alert": SuccessAlert,
-    "app-part-ii": PartII
+    "app-quiz": Quiz,
+    "app-toggle-part": TogglePart
   },
 
   data() {
@@ -192,6 +179,10 @@ export default {
   methods: {
     toggleAlert() {
       this.show = !this.show;
+    },
+
+    togglePart(value) {
+      this.part = value;
     },
 
     addItem() {
